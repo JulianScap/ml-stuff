@@ -2,7 +2,7 @@ import brain from "brain.js";
 import { readObject } from "../tools/files.js";
 import { getHighestKey } from "../tools/helper.js";
 
-const net = new brain.NeuralNetworkGPU();
+const net = new brain.NeuralNetwork();
 const networkAsJson = await readObject("network.json");
 const testData = await readObject("test.json");
 
@@ -19,4 +19,11 @@ const results = testData.map((item) => {
     };
 });
 
-console.table(results);
+const failed = results.filter((x) => x.expected !== x.result);
+console.table(failed);
+
+console.log(
+    `Failed ${failed.length}/${results.length} = ${
+        (failed.length / results.length) * 100
+    }%`
+);

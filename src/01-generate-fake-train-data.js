@@ -3,7 +3,7 @@ import { max, diff, mean, randomEntry } from "../tools/array.js";
 import { writeObject } from "../tools/files.js";
 
 const TRAIN_SAMPLES = 10000;
-const TEST_SAMPLES = 10;
+const TEST_SAMPLES = 2000;
 const SPEEDS_PER_SAMPLES = 50;
 
 function* makeSpeeds(
@@ -46,9 +46,6 @@ function* build(samples) {
             (meanSpeed > 100 ? 1 : 0) +
             (maxSpeed > 105 ? 1 : 0);
 
-        // const maxSpeed = max(speeds);
-        // const score = maxSpeed > 105 ? 1 : 0;
-
         const output = {};
         switch (score) {
             case 1:
@@ -66,13 +63,11 @@ function* build(samples) {
         }
 
         const trainRecord = {
-            //raw: speeds.join(","),
             input: {
                 maxSpeed: maxSpeed / 1000,
                 meanSpeed: meanSpeed / 1000,
                 largestDiff: largestDiff / 100,
             },
-            //input: [maxSpeed],
             output,
         };
 
