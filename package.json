@@ -1,5 +1,12 @@
 {
   "type": "module",
+
+  "scripts": {
+    "fake": "node ./src/01-generate-fake-train-data.js",
+    "train": "node ./src/02-train-brain.js",
+    "test": "node ./src/03-test-brain.js",
+    "tt": "node ./src/99-train-and-test.js"
+  },
   "dependencies": {
     "brain.js": "^2.0.0-beta.23",
     "gpu.js": "^2.16.0"
