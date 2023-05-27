@@ -1,6 +1,6 @@
 import brain from "brain.js";
-import { readObject } from "../tools/files.js";
-import { getHighestKey } from "../tools/helper.js";
+import { readObject } from "./tools/files.js";
+import { getHighestKey } from "./tools/helper.js";
 
 const net = new brain.NeuralNetwork();
 const networkAsJson = await readObject("network.json");

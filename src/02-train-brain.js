@@ -1,5 +1,5 @@
 import brain from "brain.js";
-import { readObject, writeObject } from "../tools/files.js";
+import { readObject, writeObject } from "./tools/files.js";
 
 const crossTrain = false;
 
@@ -13,7 +13,7 @@ if (crossTrain) {
 
     crossValidate.train(trainMatter, {
         logPeriod: 1000,
-        log: (detail) => console.log(detail),
+        log: true,
     });
 
     net = crossValidate.toNeuralNetwork();
@@ -21,7 +21,7 @@ if (crossTrain) {
     net = buildNetwork();
     net.train(trainMatter, {
         logPeriod: 1000,
-        log: (detail) => console.log(detail),
+        log: true,
     });
 }
 

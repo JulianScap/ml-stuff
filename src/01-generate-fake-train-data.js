@@ -1,9 +1,9 @@
-import { randomBool } from "../tools/random.js";
-import { max, diff, mean, randomEntry } from "../tools/array.js";
-import { writeObject } from "../tools/files.js";
+import { randomBool } from "./tools/random.js";
+import { max, diff, mean, randomEntry } from "./tools/array.js";
+import { writeObject } from "./tools/files.js";
 
-const TRAIN_SAMPLES = 10000;
-const TEST_SAMPLES = 2000;
+const TRAIN_SAMPLES = 100000;
+const TEST_SAMPLES = 20000;
 const SPEEDS_PER_SAMPLES = 50;
 
 function* makeSpeeds(
@@ -11,7 +11,7 @@ function* makeSpeeds(
     startSpeed,
     ratio,
     step,
-    harshEventRatio = 1 / 1000
+    harshEventRatio
 ) {
     let speed = startSpeed;
 
@@ -30,11 +30,12 @@ function* makeSpeeds(
 
 function* build(samples) {
     for (let index = 0; index < samples; index++) {
-        const speedUpRatio = randomEntry([3 / 4, 1 / 2, 1 / 4]);
+        const speedUpRatio = randomEntry([3 / 4, 2 / 4, 1 / 4]);
+        const harshEventRatio = randomEntry([1 / 2000, 1 / 1000, 1 / 500]);
         const step = randomEntry([1, 2, 3]);
         const initialSpeed = randomEntry([50, 80, 80, 90, 90]);
         const speeds = [
-            ...makeSpeeds(SPEEDS_PER_SAMPLES, initialSpeed, speedUpRatio, step),
+            ...makeSpeeds(SPEEDS_PER_SAMPLES, initialSpeed, speedUpRatio, step, harshEventRatio),
         ];
 
         const maxSpeed = max(speeds);
