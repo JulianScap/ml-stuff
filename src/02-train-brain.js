@@ -3,7 +3,7 @@ import { readObject, writeObject } from "../tools/files.js";
 
 const crossTrain = false;
 
-const buildNetwork = () => new brain.NeuralNetworkGPU();
+const buildNetwork = () => new brain.NeuralNetwork();
 let net = null;
 
 const trainMatter = await readObject("speeds.json");
