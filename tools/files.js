@@ -2,7 +2,7 @@ import fs from "fs";
 
 const FOLDER = "./data";
 
-async function writeObject(object, fileName = "speeds.json") {
+async function writeObject(object, fileName) {
     if (!fs.existsSync(FOLDER)) {
         fs.promises.mkdir(FOLDER);
     }
@@ -13,7 +13,7 @@ async function writeObject(object, fileName = "speeds.json") {
     );
 }
 
-async function readObject(fileName = "speeds.json") {
+async function readObject(fileName) {
     const content = await fs.promises.readFile(`${FOLDER}/${fileName}`);
     return JSON.parse(content);
 }

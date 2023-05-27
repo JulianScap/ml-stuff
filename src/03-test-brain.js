@@ -1,5 +1,6 @@
 import brain from "brain.js";
 import { readObject } from "../tools/files.js";
+import { getHighestKey } from "../tools/helper.js";
 
 const net = new brain.NeuralNetworkGPU();
 const networkAsJson = await readObject("network.json");
@@ -13,8 +14,8 @@ const results = testData.map((item) => {
 
     return {
         input: JSON.stringify(input),
-        expected: JSON.stringify(expected),
-        result: JSON.stringify(result),
+        expected: Object.keys(expected)[0],
+        result: getHighestKey(result),
     };
 });
 

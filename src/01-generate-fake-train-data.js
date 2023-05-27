@@ -2,7 +2,7 @@ import { randomBool } from "../tools/random.js";
 import { max, diff, mean, randomEntry } from "../tools/array.js";
 import { writeObject } from "../tools/files.js";
 
-const TRAIN_SAMPLES = 10;
+const TRAIN_SAMPLES = 10000;
 const TEST_SAMPLES = 10;
 const SPEEDS_PER_SAMPLES = 50;
 
@@ -67,7 +67,11 @@ function* build(samples) {
 
         const trainRecord = {
             //raw: speeds.join(","),
-            input: { maxSpeed, meanSpeed, largestDiff },
+            input: {
+                maxSpeed: maxSpeed / 1000,
+                meanSpeed: meanSpeed / 1000,
+                largestDiff: largestDiff / 100,
+            },
             //input: [maxSpeed],
             output,
         };
@@ -79,5 +83,5 @@ function* build(samples) {
 const trainData = [...build(TRAIN_SAMPLES)];
 const testData = [...build(TEST_SAMPLES)];
 
-await writeObject(trainData);
+await writeObject(trainData, "speeds.json");
 await writeObject(testData, "test.json");
