@@ -6,11 +6,12 @@ const { FeedForward, layer, NeuralNetwork, CrossValidate, NeuralNetworkGPU } =
     brain;
 const { feedForward, target, input } = layer;
 
-const crossTrain = false;
+const crossTrain = true;
+const k = 7;
 const networkType = NetworkTypes.NeuralNetwork;
 const trainSettings = {
     iterations: 2000,
-    logPeriod: 100,
+    logPeriod: 10,
     log: (details) => console.log(details),
 };
 
@@ -46,7 +47,7 @@ const trainMatter = await readObject("speeds.json");
 
 if (crossTrain) {
     const crossValidate = new CrossValidate(buildNetwork);
-    crossValidate.train(trainMatter, trainSettings);
+    crossValidate.train(trainMatter, trainSettings, k);
 
     net = crossValidate.toNeuralNetwork();
 } else {

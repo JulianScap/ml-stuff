@@ -25,7 +25,6 @@ function* makeSpeeds(length, startSpeed, ratio, step, harshEventRatio) {
 function* build(samples) {
     for (let index = 0; index < samples; index++) {
         const speedUpRatio = randomEntry([3 / 4, 2 / 4, 1 / 4]);
-        //const harshEventRatio = randomEntry([1 / 2000, 1 / 1000, 1 / 500]);
         const step = randomEntry([1, 2, 3]);
         const initialSpeed = randomEntry([50, 80, 80, 90, 90]);
         const speeds = [
@@ -42,38 +41,14 @@ function* build(samples) {
         const meanSpeed = mean(speeds);
         let largestDiff = max(diff(speeds));
 
-        if (largestDiff < 5) {
-            largestDiff = 0;
-        }
-
         const score =
             (largestDiff > 5 ? 1 : 0) +
             (meanSpeed > 100 ? 1 : 0) +
             (maxSpeed > 105 ? 1 : 0);
 
-        const output = {};
-        switch (score) {
-            case 1:
-                output.medium = 1;
-                break;
-            case 2:
-                output.dangerous = 1;
-                break;
-            case 3:
-                output.aggressive = 1;
-                break;
-            default:
-                output.safe = 1;
-                break;
-        }
-
         const trainRecord = {
-            input: {
-                maxSpeed: maxSpeed / 300,
-                meanSpeed: meanSpeed / 300,
-                largestDiff: largestDiff / 100,
-            },
-            output,
+            input: speeds.map(x => x / 300),
+            output : [score / 3],
         };
 
         yield trainRecord;

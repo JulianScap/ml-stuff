@@ -13,13 +13,14 @@ const results = testData.map((item) => {
     const result = net.run(input);
 
     return {
-        input: JSON.stringify(input),
-        expected: Object.keys(expected)[0],
-        result: getHighestKey(result),
+        //input: JSON.stringify(input),
+        expected: expected[0],
+        result: result[0],
+        delta: Math.abs(expected[0] - result[0]),
     };
 });
 
-const failed = results.filter((x) => x.expected !== x.result);
+const failed = results.filter((x) => x.delta > 0.33333333333);
 console.table(failed);
 
 console.log(
