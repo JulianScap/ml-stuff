@@ -1,6 +1,5 @@
 {
   "type": "module",
-
   "scripts": {
     "fake": "node ./src/01-generate-fake-train-data.js",
     "train": "node ./src/02-train-brain.js",
