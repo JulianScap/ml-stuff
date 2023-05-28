@@ -6,9 +6,9 @@ const { FeedForward, layer, NeuralNetwork, CrossValidate, NeuralNetworkGPU } =
     brain;
 const { feedForward, target, input } = layer;
 
-const crossTrain = true;
+const crossTrain = false;
 const k = 7;
-const networkType = NetworkTypes.NeuralNetworkGPU;
+const networkType = NetworkTypes.NeuralNetwork;
 const trainSettings = {
     iterations: 2000,
     logPeriod: 10,
