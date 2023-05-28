@@ -8,7 +8,7 @@ const { feedForward, target, input } = layer;
 
 const crossTrain = true;
 const k = 7;
-const networkType = NetworkTypes.NeuralNetwork;
+const networkType = NetworkTypes.NeuralNetworkGPU;
 const trainSettings = {
     iterations: 2000,
     logPeriod: 10,
