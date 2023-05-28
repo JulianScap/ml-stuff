@@ -2,17 +2,11 @@ import { randomBool } from "./tools/random.js";
 import { max, diff, mean, randomEntry } from "./tools/array.js";
 import { writeObject } from "./tools/files.js";
 
-const TRAIN_SAMPLES = 100000;
-const TEST_SAMPLES = 20000;
+const TRAIN_SAMPLES = 10000;
+const TEST_SAMPLES = 2000;
 const SPEEDS_PER_SAMPLES = 50;
 
-function* makeSpeeds(
-    length,
-    startSpeed,
-    ratio,
-    step,
-    harshEventRatio
-) {
+function* makeSpeeds(length, startSpeed, ratio, step, harshEventRatio) {
     let speed = startSpeed;
 
     for (let i = 0; i < length; i++) {
@@ -31,16 +25,26 @@ function* makeSpeeds(
 function* build(samples) {
     for (let index = 0; index < samples; index++) {
         const speedUpRatio = randomEntry([3 / 4, 2 / 4, 1 / 4]);
-        const harshEventRatio = randomEntry([1 / 2000, 1 / 1000, 1 / 500]);
+        //const harshEventRatio = randomEntry([1 / 2000, 1 / 1000, 1 / 500]);
         const step = randomEntry([1, 2, 3]);
         const initialSpeed = randomEntry([50, 80, 80, 90, 90]);
         const speeds = [
-            ...makeSpeeds(SPEEDS_PER_SAMPLES, initialSpeed, speedUpRatio, step, harshEventRatio),
+            ...makeSpeeds(
+                SPEEDS_PER_SAMPLES,
+                initialSpeed,
+                speedUpRatio,
+                step,
+                1 / 1000
+            ),
         ];
 
         const maxSpeed = max(speeds);
         const meanSpeed = mean(speeds);
-        const largestDiff = max(diff(speeds));
+        let largestDiff = max(diff(speeds));
+
+        if (largestDiff < 5) {
+            largestDiff = 0;
+        }
 
         const score =
             (largestDiff > 5 ? 1 : 0) +
@@ -65,8 +69,8 @@ function* build(samples) {
 
         const trainRecord = {
             input: {
-                maxSpeed: maxSpeed / 1000,
-                meanSpeed: meanSpeed / 1000,
+                maxSpeed: maxSpeed / 300,
+                meanSpeed: meanSpeed / 300,
                 largestDiff: largestDiff / 100,
             },
             output,
