@@ -3,7 +3,7 @@ import { max, diff, mean, randomEntry } from "./tools/array.js";
 import { writeObject } from "./tools/files.js";
 
 const TRAIN_SAMPLES = 100000;
-const TEST_SAMPLES = 2000;
+const TEST_SAMPLES = 20000;
 const SPEEDS_PER_SAMPLES = 50;
 
 function* makeSpeeds(length, startSpeed, ratio, step, harshEventRatio) {
