@@ -1,13 +1,15 @@
 import brain from "brain.js";
 import { readObject, writeObject } from "./tools/files.js";
-import NetworkType from "./tools/NetworkType.js";
+import NetworkTypes from "./tools/NetworkTypes.js";
 
-const { FeedForward, layer, NeuralNetwork, CrossValidate } = brain;
+const { FeedForward, layer, NeuralNetwork, CrossValidate, NeuralNetworkGPU } =
+    brain;
 const { feedForward, target, input } = layer;
 
 const crossTrain = false;
-const networkType = NetworkType.NeuralNetwork;
+const networkType = NetworkTypes.NeuralNetwork;
 const trainSettings = {
+    iterations: 2000,
     logPeriod: 100,
     log: (details) => console.log(details),
 };
@@ -15,7 +17,7 @@ const trainSettings = {
 let net = null;
 let buildNetwork = null;
 switch (networkType) {
-    case NetworkType.FeedForward:
+    case NetworkTypes.FeedForward:
         buildNetwork = () =>
             new FeedForward({
                 inputLayer: () => input({ height: 3 }),
@@ -31,8 +33,12 @@ switch (networkType) {
             });
         break;
 
-    case NetworkType.NeuralNetwork:
+    case NetworkTypes.NeuralNetwork:
         buildNetwork = () => new NeuralNetwork();
+        break;
+
+    case NetworkTypes.NeuralNetworkGPU:
+        buildNetwork = () => new NeuralNetworkGPU();
         break;
 }
 
@@ -40,7 +46,6 @@ const trainMatter = await readObject("speeds.json");
 
 if (crossTrain) {
     const crossValidate = new CrossValidate(buildNetwork);
-
     crossValidate.train(trainMatter, trainSettings);
 
     net = crossValidate.toNeuralNetwork();
