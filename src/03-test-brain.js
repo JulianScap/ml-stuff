@@ -20,7 +20,7 @@ const results = testData.map((item) => {
     };
 });
 
-const failed = results.filter((x) => x.delta > 0.33333333333);
+const failed = results.filter((x) => x.delta > 0.2);
 console.table(failed);
 
 console.log(

@@ -2,7 +2,7 @@ import { randomBool } from "./tools/random.js";
 import { max, diff, mean, randomEntry } from "./tools/array.js";
 import { writeObject } from "./tools/files.js";
 
-const TRAIN_SAMPLES = 50000;
+const TRAIN_SAMPLES = 100000;
 const TEST_SAMPLES = TRAIN_SAMPLES / 5;
 const SPEEDS_PER_SAMPLES = 50;
 
