@@ -17,7 +17,7 @@ const trainSettings = {
 };
 
 const height = trainMatter[0].input.length;
-const hiddenLayers = 3;
+const hiddenLayers = 10;
 const options = {
   hiddenLayers: new Array(hiddenLayers).fill(height),
 };
