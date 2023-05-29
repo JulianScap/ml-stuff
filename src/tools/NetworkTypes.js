@@ -1,7 +1,6 @@
 const NetworkTypes = {
-    FeedForward: "FeedForward",
-    NeuralNetwork: "NeuralNetwork",
-    NeuralNetworkGPU: "NeuralNetworkGPU",
+  NeuralNetwork: 'NeuralNetwork',
+  NeuralNetworkGPU: 'NeuralNetworkGPU',
 };
 
 export default NetworkTypes;
