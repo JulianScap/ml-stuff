@@ -28,10 +28,11 @@ const options = {
 };
 
 console.log(`Creating a ${networkType} with:`);
-console.log(`\tInputSize: ${inputSize}`);
+console.log(`\tInput Size: ${inputSize}`);
 console.log(`\tOutput Size: ${outputSize}`);
 console.log(`\tHeight: ${height}`);
 console.log(`\tHiddenLayers: ${hiddenLayers}`);
+console.log(`\tTrainingData: ${trainMatter.length}`);
 
 let net = null;
 let buildNetwork = null;
