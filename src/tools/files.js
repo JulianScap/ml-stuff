@@ -4,7 +4,7 @@ const FOLDER = './data';
 
 async function writeObject(object, fileName) {
   if (!fs.existsSync(FOLDER)) {
-    fs.promises.mkdir(FOLDER);
+    await fs.promises.mkdir(FOLDER);
   }
 
   await fs.promises.writeFile(`${FOLDER}/${fileName}`, JSON.stringify(object));
