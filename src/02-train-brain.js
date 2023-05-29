@@ -5,12 +5,8 @@ import settings from './settings.js';
 const trainMatter = await readObject('speeds.json');
 
 console.log(`Started at ${new Date().toLocaleString()}`);
-console.log(`Creating a ${settings.network.type} with:`);
-console.log(`\tHiddenLayers: ${settings.network.hiddenLayers}`);
-console.log(`\tTrainingData: ${trainMatter.length}`);
-console.log(
-  `\tCross Validation? ${settings.crossTrainSettings.crossTrain} (K=${settings.crossTrainSettings.k})`
-);
+console.log(`Settings:`);
+console.log(settings);
 
 const networkBuilder = getNetworkBuilder(trainMatter);
 const net = getAndTrainNetwork(networkBuilder, trainMatter);
