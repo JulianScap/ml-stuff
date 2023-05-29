@@ -8,19 +8,34 @@ const { feedForward, target, input } = layer;
 
 const trainMatter = await readObject('speeds.json');
 const crossTrain = true;
-const k = 3;
+const k = 3; // 7
 const networkType = NetworkTypes.NeuralNetwork;
 const trainSettings = {
-  iterations: 2000,
+  iterations: 20000,
   logPeriod: 10,
+  errorThresh: 3 / 1000,
   log: (details) => console.log(details),
 };
 
-const height = trainMatter[0].input.length;
-const hiddenLayers = 10;
+const inputSize = trainMatter[0].input.length;
+const outputSize = trainMatter[0].output.length;
+const neuronRatio = 2 / 3;
+
+const factor = 2; // in range [2-10]
+
+const height = Math.ceil((inputSize + outputSize) * neuronRatio);
+const hiddenLayers = Math.ceil(
+  trainMatter.length / (factor * (inputSize + outputSize))
+); // not sure about this, not just 2?
 const options = {
   hiddenLayers: new Array(hiddenLayers).fill(height),
 };
+
+console.log(`Creating a ${networkType} with:`);
+console.log(`\tInputSize: ${inputSize}`);
+console.log(`\tOutput Size: ${outputSize}`);
+console.log(`\tHeight: ${height}`);
+console.log(`\tHiddenLayers: ${hiddenLayers}`);
 
 let net = null;
 let buildNetwork = null;
@@ -28,16 +43,15 @@ switch (networkType) {
   case NetworkTypes.FeedForward:
     buildNetwork = () =>
       new FeedForward({
-        inputLayer: () => input({ height: 3 }),
-        hiddenLayers: [
-          (inputLayer) => feedForward({ height: 3 }, inputLayer),
-          (inputLayer) => feedForward({ height: 3 }, inputLayer),
-        ],
+        inputLayer: () => input({ height: 50 }),
+        hiddenLayers: new Array(hiddenLayers).fill((inputLayer) =>
+          feedForward({ height: height }, inputLayer)
+        ),
         outputLayer: (inputLayer) => target({ height: 4 }, inputLayer),
         praxisOpts: {
           decayRate: 0.99,
         },
-        sizes: [3, 3, 4],
+        sizes: [3, 3, 4], // TODO
       });
     break;
 
