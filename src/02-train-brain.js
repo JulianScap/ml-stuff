@@ -13,7 +13,7 @@ const networkType = NetworkTypes.NeuralNetwork;
 const trainSettings = {
   iterations: 20000,
   logPeriod: 10,
-  errorThresh: 3 / 1000,
+  errorThresh: 2 / 1000,
   log: (details) => console.log(details),
 };
 
@@ -21,12 +21,8 @@ const inputSize = trainMatter[0].input.length;
 const outputSize = trainMatter[0].output.length;
 const neuronRatio = 2 / 3;
 
-const factor = 2; // in range [2-10]
-
-const height = Math.ceil((inputSize + outputSize) * neuronRatio);
-const hiddenLayers = Math.ceil(
-  trainMatter.length / (factor * (inputSize + outputSize))
-); // not sure about this, not just 2?
+const height = Math.floor((inputSize + outputSize) * neuronRatio);
+const hiddenLayers = 3; // in range [1, 3]
 const options = {
   hiddenLayers: new Array(hiddenLayers).fill(height),
 };
@@ -51,7 +47,7 @@ switch (networkType) {
         praxisOpts: {
           decayRate: 0.99,
         },
-        sizes: [3, 3, 4], // TODO
+        sizes: [inputSize, height, height],
       });
     break;
 
