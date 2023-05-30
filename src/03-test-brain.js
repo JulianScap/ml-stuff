@@ -3,7 +3,7 @@ import { readObject } from './tools/files.js';
 import { log } from './tools/logger.js';
 
 const net = new brain.NeuralNetwork();
-const networkAsJson = await readObject('network.json');
+const networkAsJson = await readObject('network_0.json');
 const testData = await readObject('test.json');
 
 net.fromJSON(networkAsJson);

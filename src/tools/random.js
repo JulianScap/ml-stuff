@@ -3,5 +3,3 @@ function randomBool(ratio = 0.5) {
 }
 
 export { randomBool };
-
-export default { randomBool };

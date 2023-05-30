@@ -47,11 +47,18 @@ function* build(samples) {
       (maxSpeed > 105 ? 1 : 0);
 
     const trainRecord = {
-      input: speeds.map((x) => x / 300),
+      input: [maxSpeed / 300, meanSpeed / 300, largestDiff / 300],
       output: [score / 3],
     };
 
     yield trainRecord;
+
+    // const trainRecord = {
+    //   input: speeds.map((x) => x / 300),
+    //   output: [score / 3],
+    // };
+
+    // yield trainRecord;
   }
 }
 

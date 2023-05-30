@@ -46,4 +46,3 @@ function getAndTrainNetwork(buildNetwork, trainMatter, settings) {
 }
 
 export { getNetworkBuilder, getAndTrainNetwork };
-export default { getNetworkBuilder, getAndTrainNetwork };

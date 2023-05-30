@@ -14,4 +14,3 @@ function getHighestKey(object) {
 }
 
 export { getHighestKey };
-export default { getHighestKey };

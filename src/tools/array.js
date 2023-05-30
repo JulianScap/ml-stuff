@@ -37,5 +37,3 @@ function diff(array) {
 }
 
 export { max, diff, sum, mean, randomEntry };
-
-export default { max, diff, sum, mean, randomEntry };
