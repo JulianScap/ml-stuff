@@ -57,7 +57,11 @@ function* build(samples) {
       yield trainRecord;
     } else {
       const trainRecord = {
-        input: [maxSpeed / MAX_SPEED_DIVISOR, meanSpeed / MAX_SPEED_DIVISOR, largestDiff / MAX_SPEED_DIVISOR],
+        input: [
+          maxSpeed / MAX_SPEED_DIVISOR,
+          meanSpeed / MAX_SPEED_DIVISOR,
+          largestDiff / MAX_SPEED_DIVISOR,
+        ],
         output: [score / 3],
       };
 
