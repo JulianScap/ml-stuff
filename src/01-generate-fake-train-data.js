@@ -5,6 +5,8 @@ import { writeObject } from './tools/files.js';
 const TRAIN_SAMPLES = 10000;
 const TEST_SAMPLES = TRAIN_SAMPLES / 5;
 const SPEEDS_PER_SAMPLES = 50;
+const PASS_ALL_SPEEDS = true;
+const MAX_SPEED_DIVISOR = 300;
 
 function* makeSpeeds(length, startSpeed, ratio, step, harshEventRatio) {
   let speed = startSpeed;
@@ -46,19 +48,21 @@ function* build(samples) {
       (meanSpeed > 100 ? 1 : 0) +
       (maxSpeed > 105 ? 1 : 0);
 
-    const trainRecord = {
-      input: [maxSpeed / 300, meanSpeed / 300, largestDiff / 300],
-      output: [score / 3],
-    };
+    if (PASS_ALL_SPEEDS) {
+      const trainRecord = {
+        input: speeds.map((x) => x / MAX_SPEED_DIVISOR),
+        output: [score / 3],
+      };
 
-    yield trainRecord;
+      yield trainRecord;
+    } else {
+      const trainRecord = {
+        input: [maxSpeed / MAX_SPEED_DIVISOR, meanSpeed / MAX_SPEED_DIVISOR, largestDiff / MAX_SPEED_DIVISOR],
+        output: [score / 3],
+      };
 
-    // const trainRecord = {
-    //   input: speeds.map((x) => x / 300),
-    //   output: [score / 3],
-    // };
-
-    // yield trainRecord;
+      yield trainRecord;
+    }
   }
 }
 

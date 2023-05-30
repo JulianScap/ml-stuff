@@ -3,17 +3,16 @@ import NetworkTypes from './NetworkTypes.js';
 
 const { NeuralNetwork, NeuralNetworkGPU, CrossValidate } = brain;
 
-function getNetworkBuilder(trainMatter, settings) {
+function getNetworkBuilder(settings, inputSize, outputSize) {
   const { network } = settings;
   const { type, neuronRatio, hiddenLayers } = network;
-
-  const inputSize = trainMatter[0].input.length;
-  const outputSize = trainMatter[0].output.length;
 
   const height = Math.floor((inputSize + outputSize) * neuronRatio);
 
   const options = {
-    hiddenLayers: new Array(hiddenLayers).fill(height),
+    hiddenLayers: Array.isArray(hiddenLayers)
+      ? hiddenLayers
+      : new Array(hiddenLayers).fill(height),
   };
 
   switch (type) {

@@ -3,15 +3,15 @@ import { settingsNumber } from './tools/arguments.js';
 import { log } from './tools/logger.js';
 
 const crossTrainSettings = {
-  crossTrain: false,
-  k: 3, // 7
+  crossTrain: true,
+  k: 7, // 7
 };
 
 const trainSettings = {
   iterations: 20000,
   logPeriod: 10,
   log: (details) => log(details),
-  errorThresh: 10 / 1000,
+  errorThresh: 2 / 1000,
 };
 
 const settings = [
@@ -39,6 +39,24 @@ const settings = [
     network: {
       type: NetworkTypes.NeuralNetwork,
       hiddenLayers: 3, // in range [1 - 3]
+      neuronRatio: 2 / 3,
+    },
+  },
+  {
+    crossTrainSettings,
+    trainSettings,
+    network: {
+      type: NetworkTypes.NeuralNetwork,
+      hiddenLayers: [10, 10, 10, 10, 10], // in range [1 - 3]
+      neuronRatio: 2 / 3,
+    },
+  },
+  {
+    crossTrainSettings,
+    trainSettings,
+    network: {
+      type: NetworkTypes.NeuralNetwork,
+      hiddenLayers: [10, 10, 10, 10, 10], // in range [1 - 3]
       neuronRatio: 2 / 3,
     },
   },
