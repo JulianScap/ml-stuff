@@ -1,4 +1,5 @@
-import { readObject, writeObject } from './tools/files.js';
+import brain from 'brain.js';
+import { readObject, writeObject, writeAsHtml } from './tools/files.js';
 import { getNetworkBuilder, getAndTrainNetwork } from './tools/networkTools.js';
 import { log } from './tools/logger.js';
 import { getSettings } from './settings.js';
@@ -15,4 +16,9 @@ const outputSize = trainMatter[0].output.length;
 const networkBuilder = getNetworkBuilder(settings, inputSize, outputSize);
 const net = getAndTrainNetwork(networkBuilder, trainMatter, settings);
 
+const json = net.toJSON();
 await writeObject(net.toJSON(), `network_${settingsNumber}.json`);
+
+const svg = brain.utilities.toSVG(json, {});
+
+await writeAsHtml(svg, `index_${settingsNumber}.html`);

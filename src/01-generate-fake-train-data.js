@@ -3,7 +3,7 @@ import { max, diff, mean, randomEntry } from './tools/array.js';
 import { writeObject } from './tools/files.js';
 
 const TRAIN_SAMPLES = 10000;
-const TEST_SAMPLES = TRAIN_SAMPLES / 5;
+const TEST_SAMPLES = TRAIN_SAMPLES;
 const SPEEDS_PER_SAMPLES = 50;
 const PASS_ALL_SPEEDS = false;
 const MAX_SPEED_DIVISOR = 300;
