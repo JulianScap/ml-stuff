@@ -1,10 +1,9 @@
 import brain from 'brain.js';
 import NetworkTypes from './NetworkTypes.js';
-import settings from '../settings.js';
 
 const { NeuralNetwork, NeuralNetworkGPU, CrossValidate } = brain;
 
-function getNetworkBuilder(trainMatter) {
+function getNetworkBuilder(trainMatter, settings) {
   const { network } = settings;
   const { type, neuronRatio, hiddenLayers } = network;
 
@@ -29,7 +28,7 @@ function getNetworkBuilder(trainMatter) {
   }
 }
 
-function getAndTrainNetwork(buildNetwork, trainMatter) {
+function getAndTrainNetwork(buildNetwork, trainMatter, settings) {
   const { trainSettings, crossTrainSettings } = settings;
   const { crossTrain, k } = crossTrainSettings || {};
 

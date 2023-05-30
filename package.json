@@ -2,9 +2,10 @@
   "type": "module",
   "scripts": {
     "fake": "node ./src/01-generate-fake-train-data.js",
-    "train": "node ./src/02-train-brain.js",
-    "test": "node ./src/03-test-brain.js",
-    "tt": "node ./src/99-train-and-test.js"
+    "train": "node ./src/02-train-one.js 0",
+    "train-one": "node ./src/02-train-one.js",
+    "train-many": "node ./src/02-train-many.js",
+    "test": "node ./src/03-test-brain.js"
   },
   "dependencies": {
     "brain.js": "^2.0.0-beta.23",

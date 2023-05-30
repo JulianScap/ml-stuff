@@ -1,15 +1,18 @@
 import { createLogger, format, transports } from 'winston';
+import { settingsNumber } from './arguments.js';
 
 const customFormat = format.printf(({ ms, message, timestamp }) => {
   return `${timestamp}|${ms}|${message}`;
 });
 
+const filename =
+  typeof settingsNumber === 'number' && !Number.isNaN(settingsNumber)
+    ? `data/logs_${settingsNumber}.log`
+    : 'data/logs_main.log';
+
 const logger = createLogger({
   format: format.combine(format.timestamp(), format.ms(), customFormat),
-  transports: [
-    new transports.Console(),
-    new transports.File({ filename: 'data/logs.log' }),
-  ],
+  transports: [new transports.Console(), new transports.File({ filename })],
 });
 
 const log = (...messages) => {
@@ -22,4 +25,3 @@ const log = (...messages) => {
 };
 
 export { log };
-export default { log };
