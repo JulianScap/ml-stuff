@@ -1,4 +1,5 @@
 import NetworkTypes from './tools/NetworkTypes.js';
+import { log } from './tools/logger.js';
 
 const settings = {
   crossTrainSettings: {
@@ -13,7 +14,7 @@ const settings = {
   trainSettings: {
     iterations: 20000,
     logPeriod: 10,
-    log: (details) => console.log(details),
+    log: (details) => log(details),
     errorThresh: 5 / 1000,
   },
 };

@@ -1,5 +1,6 @@
 import brain from 'brain.js';
 import { readObject } from './tools/files.js';
+import { log } from './tools/logger.js';
 
 const net = new brain.NeuralNetwork();
 const networkAsJson = await readObject('network.json');
@@ -23,7 +24,7 @@ const tolerances = [0.05, 0.1, 0.2, 1 / 3];
 tolerances.forEach((tolerance) => {
   const failed = results.filter((x) => x.delta > tolerance);
 
-  console.log(
+  log(
     `Tolerance ${tolerance}\nFailed ${failed.length}/${results.length} = ${
       (failed.length / results.length) * 100
     }%\n`

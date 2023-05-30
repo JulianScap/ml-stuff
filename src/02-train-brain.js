@@ -1,12 +1,11 @@
 import { readObject, writeObject } from './tools/files.js';
 import { getNetworkBuilder, getAndTrainNetwork } from './tools/networkTools.js';
 import settings from './settings.js';
+import { log } from './tools/logger.js';
 
 const trainMatter = await readObject('speeds.json');
 
-console.log(`Started at ${new Date().toLocaleString()}`);
-console.log(`Settings:`);
-console.log(settings);
+log(`Settings:`, settings);
 
 const networkBuilder = getNetworkBuilder(trainMatter);
 const net = getAndTrainNetwork(networkBuilder, trainMatter);
