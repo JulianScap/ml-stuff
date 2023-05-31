@@ -11,7 +11,7 @@ const trainSettings = {
   iterations: 20000,
   logPeriod: 10,
   log: (details) => log(details),
-  errorThresh: 10 / 1000,
+  errorThresh: 3 / 1000,
 };
 
 const settings = [
@@ -47,8 +47,7 @@ const settings = [
     trainSettings,
     network: {
       type: NetworkTypes.NeuralNetwork,
-      hiddenLayers: [3, 2, 3], // in range [1 - 3]
-      neuronRatio: 2 / 3,
+      hiddenLayers: [50, 34, 50], // in range [1 - 3]
     },
   },
 ];

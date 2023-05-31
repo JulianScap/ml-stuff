@@ -1,5 +1,7 @@
 import brain from 'brain.js';
 import NetworkTypes from './NetworkTypes.js';
+import { writeObject } from './files.js';
+import { settingsNumber } from './arguments.js';
 
 const { NeuralNetwork, NeuralNetworkGPU, CrossValidate } = brain;
 
@@ -34,6 +36,9 @@ function getAndTrainNetwork(buildNetwork, trainMatter, settings) {
   if (crossTrain) {
     const crossValidate = new CrossValidate(buildNetwork);
     crossValidate.train(trainMatter, trainSettings, k);
+
+    var json = crossValidate.toJSON();
+    writeObject(json, `crossValidate_${settingsNumber}.json`);
 
     return crossValidate.toNeuralNetwork();
   } else {
