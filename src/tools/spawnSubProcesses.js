@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+import { exec, spawn } from 'node:child_process';
 import { settingsSetSize } from '../settings.js';
 import { log } from './logger.js';
 
@@ -18,17 +18,34 @@ async function spawnSubProcesses() {
 
 function execSubProgram(parameter) {
   return new Promise((resolved, rejected) => {
-    exec(`yarn train-one ${parameter}`, (error) => {
-      if (error) {
-        log(`Error process ${parameter}: ${error.message}`);
-        rejected(error);
+    const process = spawn(`yarn train-one ${parameter}`);
+
+    process.on('exit', (number) => {
+      if (number) {
+        log(`Error process ${parameter}: ${number}`);
+        rejected(`Error process ${parameter}: ${number}`);
         return;
       }
 
-      log(`Process ${parameter} completed`);
-
       resolved();
     });
+
+    process.stdout.on('data', function(data) {
+      data=data.toString();
+      log(`${parameter}|${data}`);
+    });
+
+    // exec(`yarn train-one ${parameter}`, (error) => {
+    //   if (error) {
+    //     log(`Error process ${parameter}: ${error.message}`);
+    //     rejected(error);
+    //     return;
+    //   }
+
+    //   log(`Process ${parameter} completed`);
+
+    //   resolved();
+    // });
   });
 }
 
