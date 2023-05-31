@@ -20,15 +20,6 @@ const settings = [
     trainSettings,
     network: {
       type: NetworkTypes.NeuralNetwork,
-      hiddenLayers: 1, // in range [1 - 3]
-      neuronRatio: 2 / 3,
-    },
-  },
-  {
-    crossTrainSettings,
-    trainSettings,
-    network: {
-      type: NetworkTypes.NeuralNetwork,
       hiddenLayers: 2, // in range [1 - 3]
       neuronRatio: 2 / 3,
     },
@@ -47,7 +38,24 @@ const settings = [
     trainSettings,
     network: {
       type: NetworkTypes.NeuralNetwork,
+      hiddenLayers: 4, // in range [1 - 3]
+      neuronRatio: 2 / 3,
+    },
+  },
+  {
+    crossTrainSettings,
+    trainSettings,
+    network: {
+      type: NetworkTypes.NeuralNetwork,
       hiddenLayers: [50, 34, 50], // in range [1 - 3]
+    },
+  },
+  {
+    crossTrainSettings,
+    trainSettings,
+    network: {
+      type: NetworkTypes.NeuralNetwork,
+      hiddenLayers: [50, 40, 34], // in range [1 - 3]
     },
   },
 ];
