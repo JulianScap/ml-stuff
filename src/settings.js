@@ -4,7 +4,7 @@ import { log } from './tools/logger.js';
 
 const crossTrainSettings = {
   crossTrain: true,
-  k: 2, // 7
+  k: 7, // 7
 };
 
 const trainSettings = {
