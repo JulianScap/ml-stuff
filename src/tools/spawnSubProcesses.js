@@ -36,18 +36,6 @@ function execSubProgram(parameter) {
       data = data.toString();
       log(`${parameter}|${data}`.trimEnd());
     });
-
-    // exec(`yarn train-one ${parameter}`, (error) => {
-    //   if (error) {
-    //     log(`Error process ${parameter}: ${error.message}`);
-    //     rejected(error);
-    //     return;
-    //   }
-
-    //   log(`Process ${parameter} completed`);
-
-    //   resolved();
-    // });
   });
 }
 
