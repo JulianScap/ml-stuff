@@ -18,7 +18,9 @@ async function spawnSubProcesses() {
 
 function execSubProgram(parameter) {
   return new Promise((resolved, rejected) => {
-    const process = spawn(`yarn`, ['train-one', `${parameter}`, 'true'], { shell: true});
+    const process = spawn(`yarn`, ['train-one', `${parameter}`, 'true'], {
+      shell: true,
+    });
 
     process.on('exit', (number) => {
       if (number) {
