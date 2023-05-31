@@ -4,11 +4,15 @@ import { settingsNumber } from './arguments.js';
 const hasSetting =
   typeof settingsNumber === 'number' && !Number.isNaN(settingsNumber);
 
-const customFormat = format.printf(({ ms, message, timestamp }) => {
+const consoleFormat = format.printf(({ ms, message, timestamp }) => {
   if (hasSetting) {
     return message;
   }
 
+  return `${timestamp}|${ms}|${message}`;
+});
+
+const fileFormat = format.printf(({ ms, message, timestamp }) => {
   return `${timestamp}|${ms}|${message}`;
 });
 
@@ -17,8 +21,15 @@ const filename = hasSetting
   : 'data/logs_main.log';
 
 const logger = createLogger({
-  format: format.combine(format.timestamp(), format.ms(), customFormat),
-  transports: [new transports.Console(), new transports.File({ filename })],
+  transports: [
+    new transports.Console({
+      format: format.combine(format.timestamp(), format.ms(), consoleFormat),
+    }),
+    new transports.File({
+      filename,
+      format: format.combine(format.timestamp(), format.ms(), fileFormat),
+    }),
+  ],
 });
 
 const log = (...messages) => {
