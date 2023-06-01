@@ -19,7 +19,8 @@ const outputSize = trainMatter[0].output.length;
 log('Building the FeedForward Network');
 
 const neuronsPerLayer = round(
-  (inputSize + outputSize) * settings.network.neuronRatio
+  (inputSize + outputSize) * settings.network.neuronRatio,
+  0
 );
 
 const layers = new Array(settings.network.hiddenLayers).fill(neuronsPerLayer);
