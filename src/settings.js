@@ -47,6 +47,14 @@ const settings = [
     trainSettings,
     network: {
       type: NetworkTypes.NeuralNetwork,
+      hiddenLayers: [50, 50, 50], // in range [1 - 3]
+    },
+  },
+  {
+    crossTrainSettings,
+    trainSettings,
+    network: {
+      type: NetworkTypes.NeuralNetwork,
       hiddenLayers: [50, 34, 50], // in range [1 - 3]
     },
   },
@@ -79,3 +87,14 @@ function getSettings() {
 const settingsSetSize = settings.length;
 
 export { settingsSetSize, getSettings };
+
+// Best perf so far
+// {
+//   crossTrainSettings,
+//   trainSettings,
+//   network: {
+//     type: NetworkTypes.NeuralNetwork,
+//     hiddenLayers: 3, // in range [1 - 3]
+//     neuronRatio: 2 / 3,
+//   },
+// },
