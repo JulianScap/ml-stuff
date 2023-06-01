@@ -17,16 +17,14 @@ async function spawnSubProcesses() {
 }
 
 function execSubProgram(parameter) {
-  return new Promise((resolved, rejected) => {
-    const process = spawn(`yarn`, ['train-one', `${parameter}`, 'true'], {
+  return new Promise((resolved, _rejected) => {
+    const process = spawn('node', ['./src/02-train-one.js', `${parameter}`], {
       shell: true,
     });
 
     process.on('exit', (number) => {
       if (number) {
         log(`Error process ${parameter}: ${number}`);
-        rejected(`Error process ${parameter}: ${number}`);
-        return;
       }
 
       resolved();
