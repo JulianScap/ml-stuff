@@ -18,7 +18,9 @@ const outputSize = trainMatter[0].output.length;
 
 log('Building the FeedForward Network');
 
-const neuronsPerLayer = round((inputSize + outputSize) * settings.network.neuronRatio);
+const neuronsPerLayer = round(
+  (inputSize + outputSize) * settings.network.neuronRatio
+);
 
 const layers = new Array(settings.network.hiddenLayers).fill(neuronsPerLayer);
 
@@ -51,9 +53,7 @@ const results = testData
       delta: Math.abs(expected[0] - result[0][0]),
     };
   })
-  .sort(function (a, b) {
-    return a.delta - b.delta;
-  });
+  .sort((a, b) => a.delta - b.delta);
 
 //console.table(results);
 
