@@ -77,7 +77,7 @@ const settings = [
 ];
 
 function getSettings() {
-  if (typeof settingsNumber === 'number') {
+  if (typeof settingsNumber === 'number' && !Number.isNaN(settingsNumber)) {
     return settings[settingsNumber];
   } else {
     return settings[0];

@@ -7,7 +7,7 @@
     "train-many": "node ./src/02-train-many.js",
     "test": "node ./src/03-test-brain.js",
     "svg": "node ./src/04-to-svg.js",
-    "feed": "node ./src/05-feed-forward.js"
+    "ff": "node ./src/05-feed-forward.js"
   },
   "dependencies": {
     "brain.js": "^2.0.0-beta.23",
